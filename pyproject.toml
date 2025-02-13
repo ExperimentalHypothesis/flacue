@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "flacue"
-version = "0.1.0"
-description = "Lossless audio file spliter using cue file."
+version = "0.1.2"
+description = "Split FLAC file using CUE file."
 authors = ["nirvikalpa samadhi"]
 readme = "README.md"
 
@@ -9,6 +9,8 @@ readme = "README.md"
 python = "^3.12"
 ffcuesplitter = "^1.0.25"
 
+[tool.poetry.scripts]
+flacue = "flacue.main:main"
 
 [build-system]
 requires = ["poetry-core"]
