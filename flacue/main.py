@@ -36,7 +36,7 @@ def remove_original_audio_file(cue_file_path: str) -> None:
     """
     original_audio_file = get_original_audio_file(cue_file_path)
     try:
-        # os.remove(original_audio_file)
+        os.remove(original_audio_file)
         logger.info(f"Deleted original audiofile {original_audio_file}")
     except OSError as e:
         logger.error(f"Error deleting original audiofile {original_audio_file}: {e}")
@@ -46,7 +46,7 @@ def get_original_audio_file(cue_file_path: str) -> str:
     """
     Get the original audio file.
     """
-    extensions = [".flac", ".alac", ".ape"]
+    extensions = [".flac", ".ape"]
 
     file_without_ext = os.path.splitext(cue_file_path)[0]
     file_with_ext = ""
@@ -64,10 +64,10 @@ def parse_args():
     """
     Parse CLI arguments.
     """
-    parser = argparse.ArgumentParser(description="Process a file.")
+    parser = argparse.ArgumentParser(description="Split a big audio file based on cue file.")
     parser.add_argument("filepath", help="Path to the file to be processed")
     parser.add_argument("-ro", "--remove-original", action="store_true",
-                        help="Remove the original file after processing", default=False)
+                        help="Remove the original audio file after splitting", default=False)
 
     return parser.parse_args()
 
@@ -83,8 +83,6 @@ def main():
     result = split_on_cue(cue_file_path)
     if result.returncode == 0 and remove_original == True:
         remove_original_audio_file(cue_file_path)
-
-    logger.info("----- ALL DONE SUCCESSFULLY -----")
 
 
 if __name__ == "__main__":
